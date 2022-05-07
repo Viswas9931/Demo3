@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+        {{ product.description|truncatewords:155 }}
+
+
+
+{% endblock %}
+{% block title %}
+    {% if category %}
+        {{ product.name }} - Chocolate Paradise
+
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="row my_prod_row_class">
+    <div class="mx_auto">
+        <p><a href=" {% url 'shop:allProdCat' %}">Home</a> | <a href="{{product.category.get_url}}">{{product.category}}</a> | {{product.name}}</p>
+    </div>
+<div class="container">
+<br>
+<div class="row">
+    <div class="col-12 col-sm-12-col-md-12 col-lg-6 text-center">
+        <div style="min-width:18rem">
+            <img src="{{product.image.url}}" alt="{{product.name}}" height="400">
+                   <div style="font-size: 12px;color: #777;margin-top: 1%;margin-bottom: 15px;"><b>NOTE:</b> Design of cake may vary from the image shown here since<br> each chef has his/her own way of baking and designing a cake.
+                   </div>
+
+        </div>
+    </div>
+
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+            <div>
+                <h1 class="my_prod_title"><b>{{product.name}}</b></h1>
+                <p><b>1/2</b> KG - ₹ <b>{{product.price}}</b></p>
+                <p><b>1</b> KG - ₹ <b>{{product.price1}}</b></p>
+            <p class="italic"><b>Description</b></p>
+            <p class="text-justify my_prod_text">{{product.description}}</p>
+            {% if product.stock <= 0 %}
+            <p class="text-justify my_prod_text"><b>Out of Stock</b></p>
+            {% else %}
+<!--            <a class="btn btn-secondary" href="{% url 'cart:add_cart' product.id %}">Add to Cart</a>-->
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}
